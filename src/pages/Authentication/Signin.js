@@ -4,11 +4,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Link } from "react-router-dom";
-import React from "react";
+import React,{useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
+import { useForm } from "react-hook-form";
+import AuthenticationService from "../../auth/AuthenticationService";
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -49,64 +52,84 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signin = () => {
+const Signin = (props) => {
+
   const classes = useStyles();
+  const { register, handleSubmit, watch, errors } = useForm();
+  const [loaderBefore, setLoaderBefore] = useState(false);
+  const [redirectToReferrer,setRedirectToReferrer] = useState(false);
+
+
+  const handleLogin = async (event, e) => {
+    
+    AuthenticationService.login(event).then(()=>{
+		
+			setRedirectToReferrer(true);
+			console.log('Autenticacion exitosa !!!');
+		}).catch((error)=>{
+			console.log(error)
+		});
+   
+  };
+
+  const {from} = props.location.state || {from:{pathname:'/productos'}};
+
+  if(redirectToReferrer){
+    console.log(from)
+		return <Redirect to={from}/>;
+	}
+
+
   return (
     <div className={classNames(classes.session, classes.background)}>
       <div className={classes.content}>
         <div className={classes.wrapper}>
           <Card>
             <CardContent>
-              <form>
+            <form autocomplete="off" onSubmit={handleSubmit(handleLogin)}>
                 <div
                   className={classNames(classes.logo, `text-xs-center pb-xs`)}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/static/images/logo-dark.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/logo-dark.png`}
                     alt=""
                     className="block"
                   />
                   <Typography variant="caption">
-                    Sign in with your app id to continue.
+                  Inicie sesión con su usuario de aplicación para continuar.
                   </Typography>
                 </div>
                 <TextField
                   id="username"
-                  label="Username"
+                  label="Usuario"
                   className={classes.textField}
                   fullWidth
                   margin="normal"
+                  {...register("user", {
+                    required: true,
+                  })}
                 />
                 <TextField
                   id="password"
-                  label="Password"
+                  label="Contraseña"
                   className={classes.textField}
                   type="password"
                   fullWidth
                   margin="normal"
+                  {...register("password", {
+                    required: true,
+                  })}
                 />
-                <FormControlLabel
-                  control={<Checkbox value="checkedA" />}
-                  label="Stayed logged in"
-                  className={classes.fullWidth}
-                />
+                
                 <Button
                   variant="contained"
                   color="primary"
                   fullWidth
                   type="submit"
                 >
-                  Login
+                  INGRESAR
                 </Button>
-                <div className="pt-1 text-md-center">
-                  <Link to="/forgot">
-                    <Button>Forgot password?</Button>
-                  </Link>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <Link to="/signup">
-                    <Button>Create new account.</Button>
-                  </Link>
-                </div>
+                
               </form>
             </CardContent>
           </Card>

@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = ({ history }) => {
+const Dashboard = (props) => {
   const classes = useStyles();
   const [state, dispatch] = useAppState();
   const [opened, setOpened] = useState(true);
@@ -143,7 +143,7 @@ const Dashboard = ({ history }) => {
       }, 300);
     });
 
-    const unlisten = history.listen(() => {
+    const unlisten = props.history.listen(() => {
       if (mediaMatcher.matches) setOpened(false);
       document.querySelector("#root > div > main").scrollTop = 0;
     });
@@ -174,7 +174,7 @@ const Dashboard = ({ history }) => {
           opened={opened}
           toggleDrawer={handleDrawerToggle}
         />
-        <Workspace opened={opened}>{getRoutes}</Workspace>
+        <Workspace opened={opened}>{props.children}</Workspace>
         <NotificationCenter
           notificationsOpen={notificationsOpen}
           toogleNotifications={handleNotificationToggle}

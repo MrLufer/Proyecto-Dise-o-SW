@@ -47,7 +47,14 @@ export const listSupplierAtives = async () => {
   return res;
 };
 
+export const login =async (params) => {
+  let res = await axios.post(`${API_PEDIDOS}/login`,params);
+  return res;
+}
+
+
 export default {
+  login,
   createPurchaseOrder,
   getPurchaseOrders,
   createProduct,

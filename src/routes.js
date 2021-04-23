@@ -75,13 +75,7 @@ import ViewColumnIcon from '@material-ui/icons/ViewColumn';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 export default {
   items: [
-    {
-      path: '/',
-      name: 'Home',
-      type: 'link',
-      icon: ExploreIcon,
-      component: Home
-    },
+   
     {
       path: '/pedidos',
       name: 'Pedidos',

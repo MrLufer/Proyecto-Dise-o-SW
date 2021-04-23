@@ -17,12 +17,15 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import NotificationsOffIcon from '@material-ui/icons/NotificationsOff';
 import PropTypes from 'prop-types';
+
+import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-
+import AuthenticationService from '../../auth/AuthenticationService';
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   appBar: {
     boxShadow: '0 1px 8px rgba(0,0,0,.3)',
@@ -92,6 +95,7 @@ const Header = ({
   toggleDrawer,
   toogleNotifications
 }) => {
+  let history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -112,6 +116,12 @@ const Header = ({
     if (searchExpanded) handleSearchExpandToggle();
   };
 
+  const handleLogout = () => {
+    AuthenticationService.logout().then(() => {
+      sessionStorage.removeItem("anio-actual");
+      history.push("/");
+    });
+  };
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.toolBar}>
@@ -208,7 +218,12 @@ const Header = ({
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary="Sign out" />
+            <Button
+            className={classes.logoutButton}
+            color="inherit"
+            onClick={handleLogout}
+          >
+            <ListItemText primary="Sign out" />  </Button>
           </MenuItem>
         </Menu>
       </Toolbar>
