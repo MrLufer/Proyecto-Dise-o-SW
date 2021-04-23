@@ -50,7 +50,11 @@ import {
   TimelinePage,
   Tooltips,
   Widgets,
-  Pedidos
+  Pedidos,
+  Proveedores,
+  OrdenesCompra,
+  Productos
+  
 } from './pages';
 
 import AppsIcon from '@material-ui/icons/Apps';
@@ -86,18 +90,25 @@ export default {
       component: Pedidos
     },
     {
-      path: '/pedidos',
+      path: '/productos',
+      name: 'Productos',
+      type: 'link',
+      icon: StorefrontIcon,
+      component: Productos
+    },
+    {
+      path: '/ordenes-compra',
       name: 'Ordenes de compra',
       type: 'link',
       icon: StorefrontIcon,
-      component: Pedidos
+      component: OrdenesCompra
     },
     {
-      path: '/pedidos',
+      path: '/proveedores',
       name: 'Proveedores',
       type: 'link',
       icon: StorefrontIcon,
-      component: Pedidos
+      component: Proveedores
     },
     // {
     //   path: '/apps',

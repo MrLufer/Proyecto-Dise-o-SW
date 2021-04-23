@@ -14,6 +14,8 @@ import React from "react";
 import registerServiceWorker from "./registerServiceWorker";
 import { render } from "react-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+
+import "bootstrap/dist/css/bootstrap.min.css"
 render(
   <AppProvider>
     <BrowserRouter basename={process.env.PUBLIC_URL}>

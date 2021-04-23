@@ -61,6 +61,10 @@ import Tooltips from './Material/tooltips';
 // Widgets
 import Widgets from './Widgets/Widgets';
 import Pedidos from "./Pedidos/Pedidos"
+import Proveedores from "./Proveedores/Proveedores"
+import OrdenesCompra from "./OrdenesCompra/OrdenesCompra"
+import Productos from "./Productos/Productos"
+
 export {
   Home,
   Calendar,
@@ -112,5 +116,8 @@ export {
   Tabs,
   TextFields,
   Tooltips,
-  Pedidos
+  Pedidos,
+  Proveedores,
+  OrdenesCompra,
+  Productos
 };
