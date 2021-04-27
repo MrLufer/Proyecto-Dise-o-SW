@@ -4,6 +4,7 @@ import {
   NotFound,
   OrdenesCompra,
   PasswordReset,
+  Employees,
   Pedidos,
   Productos,
   Proveedores,
@@ -21,6 +22,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthenticationService from "./auth/AuthenticationService";
+
 render(
   <AppProvider>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -46,6 +48,7 @@ render(
           component={OrdenesCompra}
         />
         <ProtectedRoute exact path="/proveedores" component={Proveedores} />
+        <ProtectedRoute exact path="/trabajadores" component={Employees} />
         {/* <Route exact path="/500" component={BackendError} />
         <Route exact path="/Lockscreen" component={Lockscreen} />
         <Route exact path="/forgot" component={PasswordReset} />

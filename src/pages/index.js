@@ -64,7 +64,7 @@ import Pedidos from "./Pedidos/Pedidos"
 import Proveedores from "./Proveedores/Proveedores"
 import OrdenesCompra from "./OrdenesCompra/OrdenesCompra"
 import Productos from "./Productos/Productos"
-
+import Employees from "./Employee/Employee"
 export {
   Home,
   Calendar,
@@ -119,5 +119,6 @@ export {
   Pedidos,
   Proveedores,
   OrdenesCompra,
-  Productos
+  Productos,
+  Employees
 };

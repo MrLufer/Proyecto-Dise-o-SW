@@ -17,6 +17,7 @@ import {
   listProductsActives,
   listSupplierAtives,
 } from "../../api/api.core";
+import user from "../../config/user";
 const useStyles = makeStyles((theme) => ({
   textfields: { marginBottom: "10px" },
   textarea: { height: "300px", border: "1px solid green" },
@@ -57,11 +58,14 @@ const ModalOrdenCompra = (props) => {
     getProductsA();
   }, []);
 
+  console.log(user.getId())
+
   const onSubmit = async (data) => {
     if (product && supplier) {
       let newOrderPurchase = data;
       newOrderPurchase.product = product._id;
       newOrderPurchase.supplier = supplier._id;
+      newOrderPurchase.user= user.getId();
       let res = await createPurchaseOrder(newOrderPurchase);
       setVisible(false);
       getlistOrders();

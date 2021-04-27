@@ -103,13 +103,7 @@ export default {
       icon: FaceIcon,
       component: Proveedores
     },
-    {
-      path: '/trabajadores',
-      name: 'Trabajadores',
-      type: 'link',
-      icon: PersonIcon,
-      component: Proveedores
-    },
+  
     // {
     //   path: '/apps',
     //   name: 'Apps',

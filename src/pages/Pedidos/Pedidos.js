@@ -8,12 +8,25 @@ import Typography from "@material-ui/core/Typography";
 import { Wrapper } from "../../components";
 import TablePedidos from "./TablePedidos";
 import ModalPedido from "./ModalPedido"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios"
+import { getOrders } from "../../api/api.core";
 const Blank = () => {
 
   const [visible, setVisible] = useState(false)
+
   const [loading, setloading] = useState(true)
+  const [data, setdata] = useState([])
+
+  const getListOrders = async () => {
+     let res =  await getOrders()
+     setdata(res.data)
+  }
+  
+
+  useEffect(() => {
+    getListOrders()
+  }, [])
 
   return (<Wrapper>
     <Card>
@@ -31,10 +44,10 @@ const Blank = () => {
       
       </CardContent>
     </Card>
-    <ModalPedido open={visible}   setVisible={setVisible}/>
+    <ModalPedido open={visible}  getListOrders={getListOrders}   setVisible={setVisible}/>
     <br />
 
-    <TablePedidos />
+    <TablePedidos  getListOrders={getListOrders}  data={data}/>
   </Wrapper>)
   
   }

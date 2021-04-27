@@ -1,5 +1,6 @@
 import axios from "axios";
 import API_PEDIDOS from "../config/api.pedidos";
+import user from "../config/user";
 
 export const createPurchaseOrder = async (newOrder) => {
   let res = await axios.post(`${API_PEDIDOS}/purchase-order`, newOrder);
@@ -47,14 +48,51 @@ export const listSupplierAtives = async () => {
   return res;
 };
 
-export const login =async (params) => {
-  let res = await axios.post(`${API_PEDIDOS}/login`,params);
+export const login = async (params) => {
+  let res = await axios.post(`${API_PEDIDOS}/login`, params);
   return res;
-}
+};
 
+export const getEmployees = async () => {
+  let res = await axios.get(`${API_PEDIDOS}/get-employees`);
+  return res;
+};
+
+export const addEmployee = async (params) => {
+  let res = await axios.post(`${API_PEDIDOS}/create-employee`, params);
+  return res;
+};
+
+export const addOrder = async (params) => {
+  let res = await axios.post(`${API_PEDIDOS}/create-order`, params);
+  return res;
+};
+
+export const getOrders = async () => {
+  let res = await axios.get(`${API_PEDIDOS}/get-orders`);
+  return res;
+};
+
+export const updateOrder = async (params) => {
+  let res = await axios.put(`${API_PEDIDOS}/update-purchase/${params.id}`, {
+    status: params.status,
+  });
+  return res;
+};
+
+export const userDetails = async (employee) => {
+  let res = await axios.get(`${API_PEDIDOS}/user-details/${employee}`);
+  return res;
+};
 
 export default {
   login,
+  updateOrder,
+  addOrder,
+  userDetails,
+  getOrders,
+  getEmployees,
+  addEmployee,
   createPurchaseOrder,
   getPurchaseOrders,
   createProduct,

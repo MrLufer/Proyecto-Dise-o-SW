@@ -26,7 +26,9 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function DenseTable() {
+export default function DenseTable(props) {
+  const {data}=props;
+  console.log(data)
   const classes = useStyles();
 
   return (
@@ -34,22 +36,22 @@ export default function DenseTable() {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell >Nº</TableCell>
+            <TableCell >Codigo</TableCell>
             <TableCell >Producto</TableCell>
-            <TableCell >Fecha de Inicio</TableCell>
-            <TableCell >Fecha límite</TableCell>
+            <TableCell >Precio Unitario</TableCell>
             <TableCell >Cantidad</TableCell>
-            <TableCell >Precio</TableCell>
+            <TableCell >Estado</TableCell>
+            <TableCell >Opciones</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-            
-              <TableCell>{row.calories}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.fat}</TableCell>
-              <TableCell>{row.carbs}</TableCell>
+          {data.map((row) => (
+            <TableRow key={row.code}>
+            <TableCell>{row.code}</TableCell>
+              <TableCell>{row.product.name_product}</TableCell>
+              <TableCell>{row.unit_price}</TableCell>
+              <TableCell>{row.quantity}</TableCell>
+              <TableCell>{row.status}</TableCell>
               <TableCell>{row.protein}</TableCell>
             </TableRow>
           ))}

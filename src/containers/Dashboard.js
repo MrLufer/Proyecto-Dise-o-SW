@@ -14,8 +14,10 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import routes from "../routes";
+import routesInventory from "../routesInventory";
 import { useAppState } from "../components/AppProvider/AppProvider";
 import useMountEffect from "../mountEffect";
+import user from "../config/user";
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -163,14 +165,14 @@ const Dashboard = (props) => {
     <>
       <Header
         logoAltText="Primer Admin Template"
-        logo={`${process.env.PUBLIC_URL}/static/images/logo.svg`}
+        logo={`${process.env.PUBLIC_URL}/static/images/logo.png`}
         toggleDrawer={handleDrawerToggle}
         toogleNotifications={handleNotificationToggle}
         toggleFullscreen={handleFullscreenToggle}
       />
       <div className={classNames(classes.panel, "theme-dark")}>
         <Sidebar
-          routes={routes.items}
+          routes={user.getRol()=="ADMIN"? routes.items :routesInventory.items }
           opened={opened}
           toggleDrawer={handleDrawerToggle}
         />
